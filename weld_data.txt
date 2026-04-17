@@ -1,0 +1,66 @@
+WELDING PROCEDURE SPECIFICATION - WPS-2026-001
+
+Project: Pressure Vessel PV-4401
+Client: Tata Steel, Jamshedpur
+Standard: ASME Section IX, AWS D1.1
+
+JOINT DESIGN
+Type: Single-V Groove Butt Joint
+Angle: 60 degrees
+Root Gap: 2.4 mm
+Root Face: 1.6 mm
+Backing: Ceramic backing strip
+
+BASE METAL
+Material: SA-516 Grade 70 (Carbon Steel)
+Thickness: 18 mm
+P-Number: P1, Group 1
+
+FILLER METAL
+Process: GMAW (MIG Welding)
+Wire: ER70S-6, 1.2 mm diameter
+F-Number: F6
+A-Number: A1
+Shielding Gas: 80% Argon + 20% CO2, flow rate 18 L/min
+
+PREHEAT AND INTERPASS
+Preheat Temperature: 100°C minimum
+Interpass Temperature: 250°C maximum
+Method: Oxy-propane torch, verified by contact pyrometer
+
+WELDING PARAMETERS - PASS DETAILS
+Pass 1 (Root): Current 180A, Voltage 22V, Travel Speed 15 cm/min, Heat Input 1.58 kJ/mm
+Pass 2 (Hot): Current 220A, Voltage 24V, Travel Speed 18 cm/min, Heat Input 1.76 kJ/mm
+Pass 3 (Fill): Current 250A, Voltage 26V, Travel Speed 20 cm/min, Heat Input 1.95 kJ/mm
+Pass 4 (Fill): Current 250A, Voltage 26V, Travel Speed 20 cm/min, Heat Input 1.95 kJ/mm
+Pass 5 (Cap): Current 230A, Voltage 25V, Travel Speed 22 cm/min, Heat Input 1.57 kJ/mm
+
+POST WELD HEAT TREATMENT (PWHT)
+Temperature: 620°C +/- 15°C
+Holding Time: 1 hour per 25 mm thickness
+Heating Rate: 200°C/hour maximum
+Cooling Rate: 250°C/hour maximum, in still air below 300°C
+
+INSPECTION AND TESTING
+Visual Inspection: 100% - Pass
+Radiographic Testing (RT): 100% - Acceptable per ASME Section V
+Ultrasonic Testing (UT): Supplementary - No recordable indications
+Hardness Test: 185 HV10 (HAZ), 175 HV10 (Weld Metal), 165 HV10 (Base Metal)
+Tensile Test: 535 MPa (exceeds minimum 485 MPa for SA-516 Gr 70)
+Bend Test: Face and root bends - No open discontinuities
+
+DEFECT LOG
+Batch WB-2026-0042: Porosity detected in Pass 2, repaired by grinding and re-welding
+Batch WB-2026-0043: Incomplete fusion at root, rejected, joint re-prepared
+Batch WB-2026-0044: Acceptable - No defects
+Batch WB-2026-0045: Undercut 0.8mm on cap pass, within acceptance limit (max 1mm per AWS D1.1)
+Batch WB-2026-0047: Slag inclusion detected by RT, repaired successfully
+Batch WB-2026-0048: Acceptable - No defects
+
+WELDER QUALIFICATION
+Welder ID: W-1087
+Name: R. Krishnamurthy
+Qualification: 6G Position (all positions)
+Process: GMAW, SMAW
+Certified per: ASME Section IX
+Certification Valid Until: March 2027
