@@ -1,6 +1,6 @@
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.runnables import RunnablePassthrough
@@ -25,10 +25,10 @@ splitter = RecursiveCharacterTextSplitter(chunk_size= 200,chunk_overlap= 50,
 
 chunks = splitter.split_documents(docs)
 
-embed = HuggingFaceBgeEmbeddings(model_name= "all-MiniLM-L6-v2")
+embed = HuggingFaceEmbeddings(model_name= "all-MiniLM-L6-v2")
 vectorstores = FAISS.from_documents(chunks,embed)
 retriever = vectorstores.as_retriever(search_kwargs={"k":3})
-search = vectorstores.similarity_search("What defects were found",k=2)
+
 
 def format_docs(docss):
     return "\n\n".join([d.page_content for d in docss ])
