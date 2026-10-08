@@ -1,19 +1,6 @@
----
-title: Weld Quality Agent
-emoji: 🔧
-colorFrom: blue
-colorTo: gray
-sdk: docker
-app_port: 7860
----
-
 # Weld Quality Agent
 
 A welding quality assistant built with Google's **Agent Development Kit (ADK)** and **Gemini 2.5 Flash**. A welding engineer can ask what the welding procedure specification (WPS) says, check actual current/voltage/travel speed against the WPS limits, get out-of-range flags from a sensor log, or upload a weld photo and have visible defects compared against the WPS acceptance criteria. Every WPS fact in an answer comes from a tool call (FAISS retrieval or a limits lookup), never from the model's memory, and the agent says so when the data is not on file.
-
-**Live demo:** _not deployed yet_
-
----
 
 ## Architecture
 
@@ -76,17 +63,7 @@ adk web         # open http://localhost:8000 and pick weld_agent
 
 ## Deployment
 
-The [Dockerfile](Dockerfile) runs the ADK web UI in a container. The API key is never in the repo or the image; it is injected at runtime as a secret.
-
-- **Hugging Face Spaces (free):** create a Docker Space, add `GOOGLE_API_KEY` under Settings > Secrets, and push this repo to the Space.
-- **Google Cloud Run:** the same agent folder deploys with ADK's own command, with the key in Secret Manager:
-
-```bash
-adk deploy cloud_run --project=PROJECT_ID --region=asia-south1 \
-  --service_name=weld-quality-agent --with_ui weld_agent \
-  -- --min-instances=0 --max-instances=2 --memory=2Gi \
-     --set-secrets=GOOGLE_API_KEY=GOOGLE_API_KEY:1
-```
+Not deployed: it runs locally. The agent folder is laid out for ADK's Cloud Run command (`adk deploy cloud_run --with_ui weld_agent`, with the API key in Secret Manager), which needs a Google Cloud billing account.
 
 ## Project layout
 
@@ -97,7 +74,6 @@ weld_agent/
   requirements.txt
   data/               # WPS document, limits, sample sensor log
 tests/test_tools.py   # pytest tests for the tools
-Dockerfile
 app.py, gemini_vecc.py  # earlier LangChain LCEL / Streamlit versions
 ```
 

@@ -1,7 +1,9 @@
-# CPU-only PyTorch: keeps the Cloud Run image small (no GPU libraries).
---extra-index-url https://download.pytorch.org/whl/cpu
-torch
-google-adk
+# PyTorch is only needed to run the small embedding model on CPU.
+# On Linux (the server) install the CPU-only build: the default Linux build
+# also downloads several GB of GPU libraries. This wheel is for Python 3.12.
+torch @ https://download.pytorch.org/whl/cpu/torch-2.14.1%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl ; sys_platform == "linux"
+torch==2.14.1 ; sys_platform != "linux"
+google-adk>=2.11,<3
 langchain-community
 langchain-huggingface
 sentence-transformers
