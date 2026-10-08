@@ -1,13 +1,13 @@
 # Weld Quality Agent
 
-A welding quality assistant built with Google's **Agent Development Kit (ADK)** and **Gemini 2.5 Flash**. A welding engineer can ask what the welding procedure specification (WPS) says, check actual current/voltage/travel speed against the WPS limits, get out-of-range flags from a sensor log, or upload a weld photo and have visible defects compared against the WPS acceptance criteria. Every WPS fact in an answer comes from a tool call (FAISS retrieval or a limits lookup), never from the model's memory, and the agent says so when the data is not on file.
+A welding quality assistant built with Google's **Agent Development Kit (ADK)** and **Gemini 3.8 Flash**. A welding engineer can ask what the welding procedure specification (WPS) says, check actual current/voltage/travel speed against the WPS limits, get out-of-range flags from a sensor log, or upload a weld photo and have visible defects compared against the WPS acceptance criteria. Every WPS fact in an answer comes from a tool call (FAISS retrieval or a limits lookup), never from the model's memory, and the agent says so when the data is not on file.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
     U[User: question, CSV or weld photo] --> UI[ADK web UI]
-    UI --> A[ADK Agent<br/>Gemini 2.5 Flash]
+    UI --> A[ADK Agent<br/>Gemini 3.8 Flash]
     A -- vision --> P[Weld photo<br/>read directly by Gemini]
     A -- tool call --> S[search_wps]
     A -- tool call --> C[check_weld_parameters]
@@ -34,7 +34,36 @@ The WPS, the limits and the sample log are synthetic demo data.
 
 ## Example queries
 
-_To be added from real runs of the agent._
+Real runs of the agent (answers lightly trimmed). The line under each question shows the tool call Gemini chose.
+
+**1. "What is the minimum preheat temperature in WPS-2026-001, and which shielding gas is used?"**
+`search_wps("WPS-2026-001 preheat temperature shielding gas")`
+
+> * **Minimum Preheat Temperature:** **100°C** minimum *(Source: `weld_data.txt > PREHEAT AND INTERPASS`)*
+> * **Shielding Gas:** **80% Argon + 20% CO₂** (flow rate: 18 L/min) *(Source: `weld_data.txt > FILLER METAL`)*
+
+**2. "For WPS-2026-001 root pass I measured 230 A, 22 V and 15 cm/min. Is that acceptable?"**
+`check_weld_parameters(wps_id="WPS-2026-001", weld_pass="root", current=230, voltage=22, travel_speed=15)`
+
+> No, these parameters are **not acceptable** (Overall: **FAIL**).
+>
+> | Parameter | Actual | Allowed Range | Result |
+> | :--- | :--- | :--- | :--- |
+> | Current (A) | 230 | 160 – 200 | **FAIL** |
+> | Voltage (V) | 22 | 20 – 24 | **PASS** |
+> | Travel Speed (cm/min) | 15 | 12 – 18 | **PASS** |
+>
+> Current is 30 A above the maximum limit.
+
+**3. "Analyze sample_weld_log.csv against WPS-2026-001 for the root pass."**
+`analyze_weld_csv(file_name="sample_weld_log.csv", wps_id="WPS-2026-001", weld_pass="root")`
+
+> | Parameter | Allowed Range | Mean | Min | Max | Out of Range | Timestamps (s) |
+> | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+> | Current (A) | 160 – 200 | 182.14 | 166.90 | 215.60 | 6 / 120 (5.0%) | 20.0 – 22.5 |
+> | Voltage (V) | 20 – 24 | 22.16 | 21.16 | 25.02 | 4 / 120 (3.3%) | 41.0 – 42.5 |
+
+**When the answer is not in the WPS** ("What is the hydrogen bake-out temperature and time required by WPS-2026-001?"), the agent searches, finds nothing, and replies that a hydrogen bake-out is *not specified* in WPS-2026-001 instead of guessing a value.
 
 ## Run it locally
 
@@ -60,6 +89,8 @@ Then:
 pytest          # tool tests, no API key needed
 adk web         # open http://localhost:8000 and pick weld_agent
 ```
+
+The free Gemini tier allows about 20 requests per day per model, and one question uses two or more. If you hit the limit, set `WELD_AGENT_MODEL` to another model (for example `gemini-3.7-flash`) before running `adk web`.
 
 ## Deployment
 
