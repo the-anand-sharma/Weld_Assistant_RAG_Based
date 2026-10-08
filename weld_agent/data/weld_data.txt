@@ -1,5 +1,6 @@
 WELDING PROCEDURE SPECIFICATION - WPS-2026-001
 
+GENERAL
 Project: Pressure Vessel PV-4401
 Client: Tata Steel, Jamshedpur
 Standard: ASME Section IX, AWS D1.1
@@ -34,6 +35,7 @@ Pass 2 (Hot): Current 220A, Voltage 24V, Travel Speed 18 cm/min, Heat Input 1.76
 Pass 3 (Fill): Current 250A, Voltage 26V, Travel Speed 20 cm/min, Heat Input 1.95 kJ/mm
 Pass 4 (Fill): Current 250A, Voltage 26V, Travel Speed 20 cm/min, Heat Input 1.95 kJ/mm
 Pass 5 (Cap): Current 230A, Voltage 25V, Travel Speed 22 cm/min, Heat Input 1.57 kJ/mm
+Permitted variation from the nominal values above: Current +/- 20 A, Voltage +/- 2 V, Travel Speed +/- 3 cm/min
 
 POST WELD HEAT TREATMENT (PWHT)
 Temperature: 620°C +/- 15°C

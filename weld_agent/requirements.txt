@@ -1,0 +1,9 @@
+# CPU-only PyTorch: keeps the Cloud Run image small (no GPU libraries).
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+google-adk
+langchain-community
+langchain-huggingface
+sentence-transformers
+faiss-cpu
+pandas

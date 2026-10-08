@@ -61,3 +61,7 @@ faiss_index/
 # Streamlit secrets (for later)
 # ============================================
 .streamlit/secrets.toml
+# ============================================
+# ADK local session data
+# ============================================
+.adk/

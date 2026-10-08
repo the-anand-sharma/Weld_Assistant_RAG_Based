@@ -1,0 +1,24 @@
+{
+  "WPS-2026-001": {
+    "root": {
+      "current_A": {"min": 160, "max": 200},
+      "voltage_V": {"min": 20, "max": 24},
+      "travel_speed_cm_min": {"min": 12, "max": 18}
+    },
+    "hot": {
+      "current_A": {"min": 200, "max": 240},
+      "voltage_V": {"min": 22, "max": 26},
+      "travel_speed_cm_min": {"min": 15, "max": 21}
+    },
+    "fill": {
+      "current_A": {"min": 230, "max": 270},
+      "voltage_V": {"min": 24, "max": 28},
+      "travel_speed_cm_min": {"min": 17, "max": 23}
+    },
+    "cap": {
+      "current_A": {"min": 210, "max": 250},
+      "voltage_V": {"min": 23, "max": 27},
+      "travel_speed_cm_min": {"min": 19, "max": 25}
+    }
+  }
+}

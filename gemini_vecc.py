@@ -15,7 +15,7 @@ llm = ChatGoogleGenerativeAI(
     google_api_key=os.getenv("GOOGLE_API_KEY")
 )
 
-text = TextLoader("weld_data.txt",'utf-8')
+text = TextLoader("weld_agent/data/weld_data.txt",'utf-8')
 docs = text.load()
 
 splitter = RecursiveCharacterTextSplitter(chunk_size= 200,chunk_overlap= 50,
